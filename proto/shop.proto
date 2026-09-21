@@ -1,0 +1,38 @@
+// GRPC contract
+
+syntax = "proto3";
+
+package go_shop;
+
+option go_package = "adamatti.github.io/go-shop/grpc";
+
+message Product {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+  double price = 4;
+  int32 available_quantity = 5;
+}
+
+message Empty {}
+
+message ListProductsRequest {
+  Empty empty = 1;
+}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+}
+
+message InsertProductRequest {
+  Product product = 1;
+}
+
+message InsertProductResponse {
+  string id = 1;
+}
+
+service Shop {
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse);
+  rpc InsertProduct(InsertProductRequest) returns (InsertProductResponse);
+}

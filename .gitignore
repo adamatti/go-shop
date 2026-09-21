@@ -1,5 +1,8 @@
+.task/
 bin/
 
 !Taskfile.yaml
-
 TODO.md
+
+*.pb.go
+

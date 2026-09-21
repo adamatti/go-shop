@@ -12,6 +12,8 @@ func main() {
 
 	rootCmd.AddCommand(cmdInsertProduct)
 	rootCmd.AddCommand(cmdListProducts)
+	rootCmd.AddCommand(cmdGrpcInsertProduct)
+	rootCmd.AddCommand(cmdGrpcListProducts)
 
 	err := rootCmd.Execute()
 	if err != nil {

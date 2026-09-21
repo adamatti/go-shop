@@ -1,5 +1,8 @@
 [tools]
-go = "1.27.1"
+go = "1.27"
 "go:github.com/securego/gosec/v2/cmd/gosec" = "latest"
 "go:golang.org/x/vuln/cmd/govulncheck" = "latest"
 golangci-lint = "latest"
+protobuf = "36.2"
+protoc-gen-go = "1.36.12"
+protoc-gen-go-grpc = "1.6.2"

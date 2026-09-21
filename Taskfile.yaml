@@ -13,6 +13,7 @@ tasks:
   clean:
     cmds:
       - rm -rf bin && mkdir bin
+      - rm -rf grpc && mkdir grpc
 
   install:
     desc: install dependencies
@@ -58,10 +59,13 @@ tasks:
   build-server:
     desc: build server
     cmds:
+      - task: grpc:generate
       - GOOS=darwin GOARCH=arm64 go build -trimpath -ldflags="-s -w" -o bin/server ./server
 
   build:
     desc: build binaries
+    aliases: [b]
+    run: once
     cmds:
       - task: build-cli
       - task: build-server
@@ -71,3 +75,18 @@ tasks:
     interactive: true
     cmds:
       - docker compose up -d
+
+  grpc:generate:
+    aliases: [gg]
+    run: once
+    sources:
+      - "proto/*.proto"
+    cmds:
+      - rm -f grpc/*.pb.go
+      - >-
+        protoc
+        --go_out=. --go_opt=paths=source_relative
+        --go-grpc_out=. --go-grpc_opt=paths=source_relative
+        --proto_path=.
+        proto/shop.proto
+      - mv proto/*.pb.go grpc/
