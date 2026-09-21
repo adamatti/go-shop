@@ -11,8 +11,11 @@ var startTime = time.Now()
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", healthHandler)
-	mux.HandleFunc("/health", healthHandler)
+	mux.HandleFunc("GET /", healthHandler)
+	mux.HandleFunc("GET /health", healthHandler)
+
+	mux.HandleFunc("GET /api/products", listProductsHandler)
+	mux.HandleFunc("POST /api/products", insertProductHandler)
 
 	port := os.Getenv("PORT")
 	if port == "" {

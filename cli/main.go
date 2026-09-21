@@ -1,7 +1,20 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/spf13/cobra"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+	var rootCmd = &cobra.Command{Use: "go-shop"}
+	rootCmd.CompletionOptions.HiddenDefaultCmd = true
+
+	rootCmd.AddCommand(cmdInsertProduct)
+	rootCmd.AddCommand(cmdListProducts)
+
+	err := rootCmd.Execute()
+	if err != nil {
+		log.Fatalf("Failed to execute command: %v", err)
+	}
 }
