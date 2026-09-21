@@ -15,3 +15,26 @@ tasks:
     aliases: [dev, r]
     cmds:
       - go run server/main.go
+
+  format:
+    desc: format
+    cmds:
+      - gofmt -s -w .
+
+  lint:
+    desc: lint
+    cmds:
+      - golangci-lint run ./...
+
+  scan:
+    desc: security scan
+    cmds:
+      - govulncheck ./...
+      - gosec ./...
+
+  check:
+    desc: run checks
+    cmds:
+      - task: format
+      - task: lint
+      # - task: scan
