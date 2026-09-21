@@ -1,6 +1,10 @@
 package repo
 
-import "go.mongodb.org/mongo-driver/v2/bson"
+import (
+	"time"
+
+	"go.mongodb.org/mongo-driver/v2/bson"
+)
 
 // Mongo
 type Product struct {
@@ -15,4 +19,22 @@ type Product struct {
 type User struct {
 	ID    string
 	Email string
+}
+
+// Postgres
+type Order struct {
+	ID        string    `gorm:"primaryKey" json:"id"`
+	UserId    string    `gorm:"not null;size:120" json:"userId"`
+	CreatedAt time.Time `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updatedAt"`
+}
+
+type OrderItem struct {
+	ID        string    `gorm:"primaryKey" json:"id"`
+	OrderId   string    `gorm:"not null;size:120" json:"orderId"`
+	Order     Order     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	ProductId string    `gorm:"not null;size:120" json:"productId"`
+	Quantity  int       `gorm:"not null" json:"quantity"`
+	CreatedAt time.Time `gorm:"autoCreateTime" json:"createdAt"`
+	UpdatedAt time.Time `gorm:"autoUpdateTime" json:"updatedAt"`
 }

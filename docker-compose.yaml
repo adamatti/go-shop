@@ -10,3 +10,14 @@ services:
     container_name: redis_container
     ports:
       - "6379:6379"
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres_container
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: app
+  

@@ -78,6 +78,21 @@ tasks:
     cmds:
       - docker compose up -d
 
+  docker:stop:
+    desc: stop docker compose
+    aliases: [ds]
+    interactive: true
+    cmds:
+      - docker compose stop -t 0
+
+  docker:restart:
+    desc: restart docker
+    aliases: [dr]
+    interactive: true
+    cmds:
+      - task: docker:stop
+      - task: docker:up
+
   grpc:generate:
     aliases: [gg]
     run: once

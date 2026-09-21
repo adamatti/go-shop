@@ -19,6 +19,8 @@ func startHttp() {
 	mux.HandleFunc("GET /api/cart", getCartHandler)
 	mux.HandleFunc("DELETE /api/cart", deleteCartHandler)
 
+	mux.HandleFunc("POST /api/orders", submitOrderHandler)
+
 	// TODO: use a config object
 	port := os.Getenv("PORT")
 	if port == "" {

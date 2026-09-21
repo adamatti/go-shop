@@ -2,7 +2,6 @@ package service
 
 import (
 	"encoding/json"
-	"errors"
 	"fmt"
 	"strings"
 
@@ -12,12 +11,6 @@ import (
 func cartKey(userID string) string {
 	return fmt.Sprintf("cart:%s", userID)
 }
-
-var (
-	ErrInvalidUserID    = errors.New("user id cannot be empty")
-	ErrInvalidProductID = errors.New("product id cannot be empty")
-	ErrInvalidQuantity  = errors.New("quantity must be greater than 0")
-)
 
 // AddToCart adds an item to the user's cart.
 // If the product already exists in the cart, its quantity is incremented.
