@@ -47,6 +47,7 @@ tasks:
     desc: run checks
     aliases: [c]
     cmds:
+      - task: grpc:generate
       - task: format
       - task: lint
       # - task: scan
@@ -72,6 +73,7 @@ tasks:
 
   docker:up:
     desc: start docker compose
+    aliases: [du]
     interactive: true
     cmds:
       - docker compose up -d

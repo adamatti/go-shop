@@ -16,14 +16,3 @@ type User struct {
 	ID    string
 	Email string
 }
-
-// Redis
-type CardItem struct {
-	ProductID string
-	Quantity  int
-}
-
-type Card struct {
-	UserID string
-	Items  []CardItem
-}

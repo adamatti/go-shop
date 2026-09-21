@@ -6,16 +6,23 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+
+	"github.com/go-playground/validator/v10"
 )
+
+var validate = validator.New()
 
 func processError(err error, w http.ResponseWriter) {
 	var (
-		syn *json.SyntaxError
-		typ *json.UnmarshalTypeError
-		max *http.MaxBytesError
+		syn    *json.SyntaxError
+		typ    *json.UnmarshalTypeError
+		max    *http.MaxBytesError
+		valErr validator.ValidationErrors
 	)
 
 	switch {
+	case errors.As(err, &valErr):
+		http.Error(w, fmt.Sprintf("validation error: %s", valErr.Error()), http.StatusBadRequest)
 	case errors.As(err, &syn):
 		http.Error(w, fmt.Sprintf("invalid json at offset %d", syn.Offset), http.StatusBadRequest)
 	case errors.As(err, &typ):
