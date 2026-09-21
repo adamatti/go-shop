@@ -1,3 +1,5 @@
+bin/
+
 !Taskfile.yaml
 
 TODO.md
