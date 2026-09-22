@@ -23,9 +23,10 @@ tasks:
 
   run:
     desc: run server instance
-    aliases: [dev, r]
+    aliases: [dev, r, server]
     cmds:
-      - go run server/main.go
+      - task: build-server
+      - ./bin/server
 
   format:
     desc: format
@@ -59,6 +60,7 @@ tasks:
 
   build-server:
     desc: build server
+    run: once
     cmds:
       - task: grpc:generate
       - GOOS=darwin GOARCH=arm64 go build -trimpath -ldflags="-s -w" -o bin/server ./server

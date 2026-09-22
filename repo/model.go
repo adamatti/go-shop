@@ -30,7 +30,7 @@ type Order struct {
 }
 
 type OrderItem struct {
-	ID        string    `gorm:"primaryKey" json:"id"`
+	ID        uint      `gorm:"primaryKey;autoIncrement"`
 	OrderId   string    `gorm:"not null;size:120" json:"orderId"`
 	Order     Order     `gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 	ProductId string    `gorm:"not null;size:120" json:"productId"`

@@ -39,6 +39,14 @@ func SubmitOrder(userID string, orderID string) error {
 			}
 		}
 
+		// submit order to queue
+		if err := SendToKafka("orders", []byte(orderID), map[string]interface{}{
+			"order_id": orderID,
+			"user_id":  userID,
+		}); err != nil {
+			return err
+		}
+
 		return nil // commit
 	})
 
