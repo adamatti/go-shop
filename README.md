@@ -57,6 +57,11 @@ Cli is also a client:
 
 # Pending
 
+- Foundation
+  - log tunning
+  - feature flags
+  - move consts for env vars / config
+  - address existing todos
 - Graphql
 - MCP server
 - SQS / SNS
